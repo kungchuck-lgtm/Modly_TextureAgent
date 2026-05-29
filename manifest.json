@@ -4,7 +4,8 @@
   "description": "Generates high-quality PBR textures for an existing 3D mesh using a reference image.",
   "version": "1.0.0",
   "author": "Your Name",
-  "repository": "https://github.com/kungchuck/Modly_TextureAgent",
+  "repository": "https://github.com/kungchuck-lgtm/Modly_TextureAgent",
+  "generator_class": "HunyuanTextureGenerator",
   "requirements": {
     "python": ">=3.10",
     "cuda": ">=12.0",
@@ -32,11 +33,10 @@
       "type": "process",
       "name": "Generate Texture",
       "description": "Runs Hunyuan3D-Paint to generate PBR textures",
-      "script": "generator.py",
-      "function": "generate",
+      "generator_class": "HunyuanTextureGenerator",
       "inputs": [
-        {"node": "input-mesh", "param": "mesh_path"},
-        {"node": "input-image", "param": "image_path"}
+        { "node": "input-mesh", "param": "mesh_path" },
+        { "node": "input-image", "param": "image_path" }
       ],
       "outputs": [
         {
