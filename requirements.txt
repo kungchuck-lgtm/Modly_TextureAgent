@@ -1,0 +1,12 @@
+# Core dependencies - will be installed by setup.py
+torch==2.5.1
+torchvision==0.20.1
+torchaudio==2.5.1
+transformers==4.46.0
+diffusers==0.30.0
+accelerate==1.1.1
+numpy==1.24.4
+scipy==1.14.1
+opencv-python==4.10.0.84
+trimesh==4.4.7
+gradio==5.33.0
