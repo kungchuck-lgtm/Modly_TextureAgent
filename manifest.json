@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "author": "Your Name",
   "repository": "https://github.com/kungchuck/Modly_TextureAgent",
-  "generator": "Generator",
+  "generator_class": "Generator",
   "nodes": [
     {
       "id": "input-mesh",
@@ -28,7 +28,7 @@
       "type": "process",
       "name": "Generate Texture",
       "description": "Runs Hunyuan3D-Paint to generate PBR textures",
-      "generator": "Generator",
+      "generator_class": "Generator",
       "inputs": [
         { "node": "input-mesh", "param": "mesh_path" },
         { "node": "input-image", "param": "image_path" }
