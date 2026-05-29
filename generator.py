@@ -1,24 +1,30 @@
 import os
+import sys
 import json
 import traceback
 from pathlib import Path
 
+# Debug: print when module loads
+print("generator.py loaded", file=sys.stderr)
+
 class HunyuanTextureGenerator:
     """
-    Lazy-loading generator – robust to extra arguments from Modly.
+    Universal constructor accepts any number of arguments.
     """
-    
     def __init__(self, *args, **kwargs):
-        # Accept any arguments (Modly may pass extra positional or keyword args)
+        # Log to help debug
+        print(f"HunyuanTextureGenerator.__init__ called with args={args}, kwargs={kwargs}", file=sys.stderr)
+        
         self.extension_dir = Path(__file__).parent
         
-        # If 'models_dir' is provided in kwargs or as first positional arg, use it
+        # Try to extract models_dir from any argument
+        self.provided_models_dir = None
         if 'models_dir' in kwargs:
             self.provided_models_dir = kwargs['models_dir']
-        elif len(args) > 0:
+        elif len(args) >= 1:
             self.provided_models_dir = args[0]
-        else:
-            self.provided_models_dir = None
+        # Also accept a second positional argument if given (ignore)
+        # No error regardless of how many args
 
     def generate(self, image_path, output_path, variant_id, **kwargs):
         mesh_path = kwargs.get('mesh_path')
@@ -26,7 +32,7 @@ class HunyuanTextureGenerator:
             return {"status": "error", "error": "mesh_path missing"}
 
         try:
-            # Load configuration
+            # Configuration
             config_file = self.extension_dir / "config.json"
             if config_file.exists():
                 with open(config_file) as f:
@@ -55,13 +61,12 @@ class HunyuanTextureGenerator:
             if not weight_files:
                 return {"status": "error", "error": f"No model weights in {models_dir}. Download them first."}
 
-            # Lazy import heavy modules
-            import sys
+            # Lazy imports
             sys.path.insert(0, str(hunyuan_root))
             sys.path.insert(0, str(hunyuan_root / 'hy3dpaint'))
             from textureGenPipeline import Hunyuan3DPaintPipeline, Hunyuan3DPaintConfig
 
-            # Variant parameters
+            # Variant
             if variant_id == "paint-ultra":
                 params = {"max_num_view": 9, "resolution": 768}
             else:
