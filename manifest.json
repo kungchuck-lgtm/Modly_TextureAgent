@@ -16,7 +16,6 @@
       "id": "input-mesh",
       "type": "input",
       "name": "Input Mesh",
-      "description": "The 3D mesh to texture (OBJ, FBX, GLB)",
       "dataType": "mesh",
       "required": true
     },
@@ -24,7 +23,6 @@
       "id": "input-image",
       "type": "input",
       "name": "Reference Image",
-      "description": "Reference image for texture generation",
       "dataType": "image",
       "required": true
     },
@@ -32,19 +30,13 @@
       "id": "texture-generator",
       "type": "process",
       "name": "Generate Texture",
-      "description": "Runs Hunyuan3D-Paint to generate PBR textures",
       "generator_class": "HunyuanTextureGenerator",
       "inputs": [
         { "node": "input-mesh", "param": "mesh_path" },
         { "node": "input-image", "param": "image_path" }
       ],
       "outputs": [
-        {
-          "id": "textured-mesh",
-          "type": "output",
-          "name": "Textured Mesh",
-          "dataType": "mesh"
-        }
+        { "id": "textured-mesh", "type": "output", "name": "Textured Mesh", "dataType": "mesh" }
       ]
     }
   ],
@@ -52,22 +44,14 @@
     {
       "id": "paint-quality",
       "name": "Balanced",
-      "description": "Generates a high-quality texture (requires ~21GB VRAM)",
       "vram_gb": 21,
-      "parameters": {
-        "max_num_view": 6,
-        "resolution": 512
-      }
+      "parameters": { "max_num_view": 6, "resolution": 512 }
     },
     {
       "id": "paint-ultra",
       "name": "Ultra Quality",
-      "description": "Generates the highest quality texture (requires ~29GB VRAM)",
       "vram_gb": 29,
-      "parameters": {
-        "max_num_view": 9,
-        "resolution": 768
-      }
+      "parameters": { "max_num_view": 9, "resolution": 768 }
     }
   ]
 }
