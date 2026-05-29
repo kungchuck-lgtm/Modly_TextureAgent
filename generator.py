@@ -1,15 +1,11 @@
-# api/extensions/hunyuan-texture/generator.py
-
-# Fix for pkg_resources issue with newer setuptools
 import pkg_resources
-
 import os
 import sys
 from pathlib import Path
 
-# Add the path to your Hunyuan3D-2.1 repo to the system path
-# Uses environment variable HUNYUAN3D_ROOT, with fallback to default path
-HUNYUAN_ROOT = Path(os.environ.get('HUNYUAN3D_ROOT', 'J:/Project/ModlyHunyuanPaintAgent/Hunyuan3D-2.1'))
+# Use Hunyuan3D-2.1 cloned by setup.py into the extension folder
+EXTENSION_DIR = Path(__file__).parent
+HUNYUAN_ROOT = Path(os.environ.get('HUNYUAN3D_ROOT', str(EXTENSION_DIR / "Hunyuan3D-2.1")))
 sys.path.insert(0, str(HUNYUAN_ROOT / 'hy3dpaint'))
 
 from textureGenPipeline import Hunyuan3DPaintPipeline, Hunyuan3DPaintConfig
