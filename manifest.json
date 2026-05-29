@@ -1,0 +1,30 @@
+{
+  "name": "Hunyuan3D-Paint Texture",
+  "id": "hunyuan-texture",
+  "description": "Generates high-quality PBR textures for an existing 3D mesh using a reference image.",
+  "version": "1.0.0",
+  "author": "Kungchuck",
+  "repository": "https://github.com/kungchuck/Modly_TextureAgent",
+  "variants": [
+    {
+      "id": "paint-quality",
+      "name": "Balanced",
+      "description": "Generates a high-quality texture.",
+      "vram_gb": 21,
+      "parameters": {
+        "max_num_view": 6,
+        "resolution": 512
+      }
+    },
+    {
+      "id": "paint-ultra",
+      "name": "Ultra Quality",
+      "description": "Generates the highest quality texture, requires more VRAM.",
+      "vram_gb": 29,
+      "parameters": {
+        "max_num_view": 9,
+        "resolution": 768
+      }
+    }
+  ]
+}
